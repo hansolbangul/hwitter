@@ -31,7 +31,7 @@ const Music = ({ userObj }) => {
         const {
             target: { value },
         } = event;
-        setMusic(value);
+        setMusic(value.split('=')[1]);
     };
 
     const onSubmit = async (event) => {
@@ -96,7 +96,7 @@ const Music = ({ userObj }) => {
                         type="text"
                         value={music}
                         onChange={onChange}
-                        placeholder="듣고싶은 노래의 value는?"
+                        placeholder="좋아하는 노래 youtube 링크"
                     />
                     <input
                         type="submit"
