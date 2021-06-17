@@ -43,6 +43,7 @@ const HweetFactory = ({ userObj }) => {
             text: hweet,
             createdAt: Date.now(),
             creatorId: userObj.uid,
+            displayName: userObj.displayName,
             attachmentUrl,
         };
         await dbService.collection('hweets').add(hweetObj);
@@ -63,7 +64,7 @@ const HweetFactory = ({ userObj }) => {
                 />
                 <input type="submit" value="&rarr;" className="factoryInput__arrow" />
             </div>
-            <label for="attach-file" className="factoryInput__label">
+            <label htmlFor="attach-file" className="factoryInput__label">
                 <span>Add photos</span>
                 <FontAwesomeIcon icon={faPlus} />
             </label>

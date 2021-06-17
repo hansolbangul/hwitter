@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import AppRouter from './Router';
-import { authService } from '../fBase';
+import { authService, dbService } from '../fBase';
 
 function App() {
     const [init, setInit] = useState(false);
     const [userObj, setUserObj] = useState(null);
+
     useEffect(() => {
         authService.onAuthStateChanged((user) => {
             // 로그인이나 로그아웃할때 나타남, 혹은 어플리케이션이 초기화 될 때 발생한다.

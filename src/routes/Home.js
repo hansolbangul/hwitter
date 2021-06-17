@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 
 const Home = ({ userObj }) => {
     const [hweets, setHweets] = useState([]);
-
     useEffect(() => {
         dbService
             .collection('hweets')
@@ -18,11 +17,12 @@ const Home = ({ userObj }) => {
                 setHweets(hweetArray);
             });
     }, []);
+    console.log(hweets);
 
     return (
         <div className="container">
             <HweetFactory userObj={userObj} />
-            <div style={{ marginTop: 30 }}>
+            <div style={{ marginTop: 30, width: '100%' }}>
                 {hweets.map((hweet) => (
                     <Hweet
                         key={hweet.id}

@@ -1,10 +1,26 @@
-import { authService } from 'fBase';
-import React, { useState } from 'react';
+import { authService, dbService } from 'fBase';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 const Profile = ({ refreshUser, userObj }) => {
     const history = useHistory();
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
+    const [hweets, setHweets] = useState({});
+
+    //사용자 이름 변경시 트윗에도 이름 변경
+    useEffect(() => {
+        dbService
+            .collection('hweets')
+            .orderBy('createdAt', 'desc')
+            .onSnapshot((snapshot) => {
+                const hweetArray = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setHweets(hweetArray);
+            });
+    }, []);
+
     const onLogOutClick = () => {
         authService.signOut();
         history.push('/'); // Redirect와 똑같이 메인으로 돌아가기 위해 사용하는 것 react-router-dom 의 Hook
@@ -33,6 +49,13 @@ const Profile = ({ refreshUser, userObj }) => {
             await userObj.updateProfile({
                 displayName: newDisplayName,
             });
+            for (let i = 0; i < hweets.length; i++) {
+                if (hweets[i].displayName === userObj.displayName)
+                    await dbService.doc(`hweets/${hweets[i].id}`).update({
+                        displayName: newDisplayName,
+                    });
+            }
+
             refreshUser();
         }
     };

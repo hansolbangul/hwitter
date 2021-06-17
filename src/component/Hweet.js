@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Hweet = ({ hweetObj, isOwner }) => {
-    console.log(hweetObj);
     const [editing, setEditting] = useState(false);
     const [newHweet, setNewHweet] = useState(hweetObj.text);
     const onDeleteClick = async () => {
@@ -29,41 +28,52 @@ const Hweet = ({ hweetObj, isOwner }) => {
         setNewHweet(value);
     };
     return (
-        <div className="nweet">
-            {editing ? (
-                <>
-                    <form onSubmit={onSubmit} className="container nweetEdit">
-                        <input
-                            type="text"
-                            placeholder="Edit your hweet"
-                            value={newHweet}
-                            onChange={onChange}
-                            required
-                            autoFocus
-                            className="formInput"
-                        />
-                        <input type="submit" className="formBtn" value="Update Hweet" />
-                    </form>
-                    <span onClick={toggleEditing} className="formBtn cancelBtn">
-                        Cancel
-                    </span>
-                </>
-            ) : (
-                <>
-                    <h4>{hweetObj.text}</h4>
-                    {hweetObj.attachmentUrl && <img src={hweetObj.attachmentUrl} alt="img" />}
-                    {isOwner && (
-                        <div class="nweet__actions">
-                            <span onClick={onDeleteClick}>
-                                <FontAwesomeIcon icon={faTrash} />
-                            </span>
-                            <span onClick={toggleEditing}>
-                                <FontAwesomeIcon icon={faPencilAlt} />
-                            </span>
-                        </div>
-                    )}
-                </>
-            )}
+        <div style={{ display: 'flex' }}>
+            <div className="nweet">
+                {editing ? (
+                    <>
+                        <form onSubmit={onSubmit} className="container nweetEdit">
+                            <input
+                                type="text"
+                                placeholder="Edit your hweet"
+                                value={newHweet}
+                                onChange={onChange}
+                                required
+                                autoFocus
+                                className="formInput"
+                            />
+                            <input type="submit" className="formBtn" value="Update Hweet" />
+                        </form>
+                        <span onClick={toggleEditing} className="formBtn cancelBtn">
+                            Cancel
+                        </span>
+                    </>
+                ) : (
+                    <>
+                        <h4>{hweetObj.text}</h4>
+                        {hweetObj.attachmentUrl && <img src={hweetObj.attachmentUrl} alt="img" />}
+                        {isOwner && (
+                            <div className="nweet__actions">
+                                <span onClick={onDeleteClick}>
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </span>
+                                <span onClick={toggleEditing}>
+                                    <FontAwesomeIcon icon={faPencilAlt} />
+                                </span>
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
+            <div>
+                {hweetObj.displayName ? (
+                    <h3 style={{ marginTop: '20px', marginLeft: '10px' }}>
+                        {hweetObj.displayName}
+                    </h3>
+                ) : (
+                    <h3 style={{ marginTop: '20px', marginLeft: '10px' }}>No Name</h3>
+                )}
+            </div>
         </div>
     );
 };
