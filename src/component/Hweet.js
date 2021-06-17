@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import nullImg from '../Img/nullImg.png';
 
-const Hweet = ({ hweetObj, isOwner, userObj }) => {
+const Hweet = ({ hweetObj, isOwner, userObj, isDeveloper }) => {
     const [editing, setEditting] = useState(false);
     const [newHweet, setNewHweet] = useState(hweetObj.text);
     const [order, setOrder] = useState(0);
@@ -63,7 +63,7 @@ const Hweet = ({ hweetObj, isOwner, userObj }) => {
                     <>
                         <h4>{hweetObj.text}</h4>
                         {hweetObj.attachmentUrl && <img src={hweetObj.attachmentUrl} alt="img" />}
-                        {isOwner && (
+                        {(isOwner || isDeveloper) && (
                             <div className="nweet__actions">
                                 <span onClick={onDeleteClick}>
                                     <FontAwesomeIcon icon={faTrash} />
@@ -76,14 +76,6 @@ const Hweet = ({ hweetObj, isOwner, userObj }) => {
                     </>
                 )}
             </div>
-
-            {/* <div style={{ order: 1, marginLeft: 0 }}>
-                {hweetObj.displayName ? (
-                    <h3 style={{ marginTop: '20px' }}>{hweetObj.displayName}</h3>
-                ) : (
-                    <h3 style={{ marginTop: '20px' }}>No Name</h3>
-                )}
-            </div> */}
             <div style={{ order: 1, marginLeft: 0, maxWidth: '60px', maxHeight: '80px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     {hweetObj.photoURL ? (

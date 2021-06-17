@@ -72,6 +72,7 @@ const Music = ({ userObj }) => {
                 }}
             >
                 <iframe
+                    style={{ borderRadius: 30 }}
                     width="210"
                     height="115"
                     src={url}

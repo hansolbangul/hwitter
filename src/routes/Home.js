@@ -28,6 +28,7 @@ const Home = ({ userObj }) => {
                         key={hweet.id}
                         hweetObj={hweet}
                         isOwner={hweet.creatorId === userObj.uid}
+                        isDeveloper={userObj.uid === 'gL1kmXFDW7Mgt3O7yF1WhuRWlum1'}
                     />
                 ))}
             </div>
