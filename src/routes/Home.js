@@ -24,6 +24,7 @@ const Home = ({ userObj }) => {
             <div style={{ marginTop: 30, width: '100%' }}>
                 {hweets.map((hweet) => (
                     <Hweet
+                        userObj={userObj}
                         key={hweet.id}
                         hweetObj={hweet}
                         isOwner={hweet.creatorId === userObj.uid}

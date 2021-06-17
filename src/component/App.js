@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AppRouter from './Router';
-import { authService, dbService } from '../fBase';
+import { authService } from '../fBase';
 
 function App() {
     const [init, setInit] = useState(false);
@@ -12,6 +12,7 @@ function App() {
             if (user) {
                 // setUserObj(user);
                 setUserObj({
+                    photoURL: user.photoURL,
                     displayName: user.displayName,
                     uid: user.uid,
                     updateProfile: (args) => user.updateProfile(args),
@@ -26,6 +27,7 @@ function App() {
     const refreshUser = () => {
         const user = authService.currentUser;
         setUserObj({
+            photoURL: user.photoURL,
             displayName: user.displayName,
             uid: user.uid,
             updateProfile: (args) => user.updateProfile(args),

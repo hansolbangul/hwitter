@@ -39,10 +39,13 @@ const HweetFactory = ({ userObj }) => {
             attachmentUrl = await reponse.ref.getDownloadURL(); // 이미지의 다운로드 Url
         }
 
+        console.log(attachmentUrl);
+
         const hweetObj = {
             text: hweet,
             createdAt: Date.now(),
             creatorId: userObj.uid,
+            photoURL: userObj.photoURL,
             displayName: userObj.displayName,
             attachmentUrl,
         };

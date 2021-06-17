@@ -30,8 +30,13 @@ const Profile = ({ refreshUser, userObj }) => {
         const {
             target: { value },
         } = event;
-        setNewDisplayName(value);
+
+        const koreanExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+        const text = value.replace(koreanExp, '');
+
+        setNewDisplayName(text);
     };
+
     // const getMyHweet = async () => {
     //     const hweets = await dbService
     //         .collection('hweets')
@@ -43,19 +48,24 @@ const Profile = ({ refreshUser, userObj }) => {
     // useEffect(() => {
     //     getMyHweet();
     // }, []); 이렇게 sql을 where을 써서 엮을 수 있음.
+
     const onSubmit = async (event) => {
+        var blank_pattern = /^\s+|\s+$/g;
+        if (newDisplayName.replace(blank_pattern, '') === '') {
+            alert(' 이름은 공백으로 설정할 수 없습니다. ');
+            return false;
+        }
         event.preventDefault();
         if (userObj.displayName !== newDisplayName) {
             await userObj.updateProfile({
                 displayName: newDisplayName,
             });
             for (let i = 0; i < hweets.length; i++) {
-                if (hweets[i].displayName === userObj.displayName)
+                if (hweets[i].creatorId === userObj.uid)
                     await dbService.doc(`hweets/${hweets[i].id}`).update({
                         displayName: newDisplayName,
                     });
             }
-
             refreshUser();
         }
     };
@@ -64,7 +74,8 @@ const Profile = ({ refreshUser, userObj }) => {
             <form onSubmit={onSubmit} className="profileForm">
                 <input
                     type="text"
-                    placeholder="Display name"
+                    placeholder="이름은 영어만 가능합니다. maxlength=12"
+                    maxLength="12"
                     onChange={onChange}
                     autoFocus
                     value={newDisplayName}

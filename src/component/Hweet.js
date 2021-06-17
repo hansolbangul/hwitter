@@ -1,11 +1,13 @@
 import { dbService, storageService } from 'fBase';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import nullImg from '../Img/nullImg.png';
 
-const Hweet = ({ hweetObj, isOwner }) => {
+const Hweet = ({ hweetObj, isOwner, userObj }) => {
     const [editing, setEditting] = useState(false);
     const [newHweet, setNewHweet] = useState(hweetObj.text);
+    const [order, setOrder] = useState(0);
     const onDeleteClick = async () => {
         const ok = window.confirm('Are you sure you want to delete this Hweet?');
         if (ok) {
@@ -27,9 +29,18 @@ const Hweet = ({ hweetObj, isOwner }) => {
         } = event;
         setNewHweet(value);
     };
+
+    useEffect(() => {
+        if (hweetObj.creatorId === userObj.uid) {
+            setOrder(0);
+        } else {
+            setOrder(2);
+        }
+    }, []);
     return (
-        <div style={{ display: 'flex' }}>
-            <div className="nweet">
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            {/* {hweetObj.creatorId === userObj.uid ?} */}
+            <div className="nweet" style={{ order: order }}>
                 {editing ? (
                     <>
                         <form onSubmit={onSubmit} className="container nweetEdit">
@@ -65,14 +76,41 @@ const Hweet = ({ hweetObj, isOwner }) => {
                     </>
                 )}
             </div>
-            <div>
+
+            {/* <div style={{ order: 1, marginLeft: 0 }}>
                 {hweetObj.displayName ? (
-                    <h3 style={{ marginTop: '20px', marginLeft: '10px' }}>
-                        {hweetObj.displayName}
-                    </h3>
+                    <h3 style={{ marginTop: '20px' }}>{hweetObj.displayName}</h3>
                 ) : (
-                    <h3 style={{ marginTop: '20px', marginLeft: '10px' }}>No Name</h3>
+                    <h3 style={{ marginTop: '20px' }}>No Name</h3>
                 )}
+            </div> */}
+            <div style={{ order: 1, marginLeft: 0, maxWidth: '60px', maxHeight: '80px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    {hweetObj.photoURL ? (
+                        <img
+                            className="profile__img"
+                            alt="userImg"
+                            src={hweetObj.photoURL}
+                            width="30px"
+                            height="30px"
+                        />
+                    ) : (
+                        <img
+                            className="profile__img"
+                            alt="nullimg"
+                            src={nullImg}
+                            width="30px"
+                            height="30px"
+                        />
+                    )}
+                    {hweetObj.displayName ? (
+                        <h3 style={{ marginTop: '20px', fontSize: '12px' }}>
+                            {hweetObj.displayName}
+                        </h3>
+                    ) : (
+                        <h3 style={{ marginTop: '20px', fontSize: '12px' }}>No Name</h3>
+                    )}
+                </div>
             </div>
         </div>
     );

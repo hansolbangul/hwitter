@@ -184,6 +184,7 @@ form {
 
 .nweet h4 {
     font-size: 14px;
+    max-width: 280px;
 }
 
 .nweet img {
@@ -278,3 +279,12 @@ form {
     font-size: 12px;
     text-decoration: underline;
 }
+
+.profile__img {
+    border-radius: 20px;
+}
+/* 
+a:hover + span {
+    opacity: 1;
+    transition: 0.5s;
+} */
