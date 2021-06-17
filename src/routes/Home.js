@@ -17,7 +17,6 @@ const Home = ({ userObj }) => {
                 setHweets(hweetArray);
             });
     }, []);
-    console.log(hweets);
 
     return (
         <div className="container">
