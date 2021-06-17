@@ -76,8 +76,15 @@ const Hweet = ({ hweetObj, isOwner, userObj, isDeveloper }) => {
                     </>
                 )}
             </div>
-            <div style={{ order: 1, marginLeft: 0, maxWidth: '60px', maxHeight: '80px' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ order: 1, marginLeft: 0, width: '80px', height: '74px' }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: '100%',
+                    }}
+                >
                     {hweetObj.photoURL ? (
                         <img
                             className="profile__img"
@@ -96,11 +103,27 @@ const Hweet = ({ hweetObj, isOwner, userObj, isDeveloper }) => {
                         />
                     )}
                     {hweetObj.displayName ? (
-                        <h3 style={{ marginTop: '20px', fontSize: '12px' }}>
+                        <h3
+                            style={{
+                                marginTop: '20px',
+                                fontSize: '12px',
+                                width: '100%',
+                                textAlign: 'center',
+                            }}
+                        >
                             {hweetObj.displayName}
                         </h3>
                     ) : (
-                        <h3 style={{ marginTop: '20px', fontSize: '12px' }}>No Name</h3>
+                        <h3
+                            style={{
+                                marginTop: '20px',
+                                fontSize: '12px',
+                                width: '100%',
+                                textAlign: 'center',
+                            }}
+                        >
+                            No Name
+                        </h3>
                     )}
                 </div>
             </div>
