@@ -66,8 +66,9 @@ const Profile = ({ refreshUser, userObj }) => {
                         displayName: newDisplayName,
                     });
             }
-            refreshUser();
         }
+        refreshUser();
+        history.push('/');
     };
     return (
         <div className="container">
