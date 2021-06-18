@@ -5,6 +5,8 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import nullImg from '../Img/nullImg.png';
 
 const Hweet = ({ hweetObj, isOwner, userObj, isDeveloper }) => {
+    const day = String(new Date(hweetObj.createdAt)).split(' ');
+    const time = day[3] + ' ' + day[1] + ' ' + day[2] + ' ' + day[4];
     const [editing, setEditting] = useState(false);
     const [newHweet, setNewHweet] = useState(hweetObj.text);
     const [order, setOrder] = useState(0);
@@ -61,7 +63,20 @@ const Hweet = ({ hweetObj, isOwner, userObj, isDeveloper }) => {
                     </>
                 ) : (
                     <>
-                        <h4>{hweetObj.text}</h4>
+                        <h4>
+                            {hweetObj.text}
+                            <br />
+                            <p
+                                style={{
+                                    position: 'absolute',
+                                    fontSize: '8px',
+                                    right: '0',
+                                    marginRight: 5,
+                                }}
+                            >
+                                {time}
+                            </p>
+                        </h4>
                         {hweetObj.attachmentUrl && <img src={hweetObj.attachmentUrl} alt="img" />}
                         {(isOwner || isDeveloper) && (
                             <div className="nweet__actions">
