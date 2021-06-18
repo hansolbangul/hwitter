@@ -10,6 +10,8 @@ firebase를 새로 파 fBase.js 파일에 값만 넣어준다면 쉽게 사용�
 
 https://www.hwitter.live
 
+가입이 간단하니 접속 후 한마디 남겨주시면 감사드리겠습니다 :D
+
 # How?
 
 -   해당 프로젝트를 clone or download 한 후 열어줍니다.
